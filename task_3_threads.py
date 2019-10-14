@@ -5,19 +5,19 @@ a = 0
 
 def function(l, arg):
     global a
-    l.acquire()
-    try:
-        for i in range(arg):
+    for i in range(arg):
+        l.acquire()
+        try:
             a += 1
-    finally:
-        l.release()
+        finally:
+            l.release()
 
 
 def main():
     lock = Lock()
     threads = []
     for i in range(5):
-        thread = Thread(target=function, args=(lock, 1000000))
+        thread = Thread(target=function, args=(lock, 100000000))
         thread.start()
         threads.append(thread)
 
